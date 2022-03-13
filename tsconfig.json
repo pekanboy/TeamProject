@@ -18,9 +18,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "outDir": "./dist",
+    "noImplicitAny": true,
   },
   "include": [
-    "src"
+    "src",
+    "declaration.d.ts"
   ]
 }

@@ -1,0 +1,38 @@
+.container {
+    position: absolute;
+    display: flex;
+
+    margin: 16px 0;
+    top: 32px;
+    left: 0;
+
+    height: 600px;
+    width: 100%;
+}
+
+.mapContainer {
+    position: absolute;
+
+    height: 100%;
+    width: 100%;
+}
+
+.label {
+    position: absolute;
+
+    /* у карты 400 */
+    z-index: 401;
+
+    top: 10px;
+    right: 16px;
+}
+
+.line {
+    position: absolute;
+
+    /* у карты 400 */
+    z-index: 401;
+
+    top: 10px;
+    right: 80px;
+}
