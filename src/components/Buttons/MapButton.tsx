@@ -1,24 +1,27 @@
-import React from "react";
-import style from './MapButton.module.css';
-import classNames from "classnames";
+import React from 'react';
+import style from 'components/Buttons/MapButton.module.css';
+import classNames from 'classnames';
 
 export interface MapButtonProps {
-    className?: string;
-    isActive?: boolean;
-    onClick: () => void;
+  className?: string;
+  isActive?: boolean;
+  onClick: () => void;
 }
 
-export const MapButton: React.FC<MapButtonProps> = ({className, isActive, children, onClick,}) => {
-    return (
-        <button
-            className={classNames(
-                className,
-                style.button,
-                {
-                    [style.active]: isActive
-                })
-            }
-            onClick={onClick}
-        >{children}</button>
-    )
-}
+export const MapButton: React.FC<MapButtonProps> = ({
+  className,
+  isActive,
+  children,
+  onClick,
+}) => {
+  return (
+    <button
+      className={classNames(className, style.button, {
+        [style.active]: isActive,
+      })}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};

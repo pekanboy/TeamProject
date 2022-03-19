@@ -1,0 +1,7 @@
+import {Icon, LatLng} from "leaflet";
+
+export interface IMarker {
+    title?: string;
+    position: LatLng;
+    icon?: Icon;
+}
