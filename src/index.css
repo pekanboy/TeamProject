@@ -1,3 +1,16 @@
+@import "@vkontakte/vkui-tokens/themes/vkBase/cssVars/declarations/index.css";
+@import 'fonts.css';
+@import 'tokens.css';
+
+/* Переопределяем токены */
+:root {
+
+}
+
+
+
+
+
 /* Указываем box sizing */
 *,
 *::before,
@@ -46,6 +59,11 @@ ol[class] {
 /* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
 a:not([class]) {
     text-decoration-skip-ink: auto;
+}
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
 }
 
 /* Упрощаем работу с изображениями */

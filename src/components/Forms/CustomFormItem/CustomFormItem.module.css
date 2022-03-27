@@ -1,0 +1,3 @@
+.formItem {
+ composes: font__text2_montserrat from global;
+}

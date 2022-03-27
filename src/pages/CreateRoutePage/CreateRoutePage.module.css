@@ -1,0 +1,39 @@
+:root {
+    --map-right-margin: 30px;
+
+    --options-width: 270px;
+}
+
+.contentContainer {
+    width: calc(100% - 80px);
+    height: calc(200% - 175px);
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    margin-top: 155px;
+}
+
+.map {
+    height: 50%;
+    width: calc(100% - var(--options-width) - var(--map-right-margin));
+    position: absolute;
+    margin-right: 30px;
+}
+
+.options {
+    height: 50%;
+    width: var(--options-width);
+    border-radius: 20px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    background-color: rgb(183 181 181 / 40%);
+    padding: 20px 10px;
+}
+
+.createForm {
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+}

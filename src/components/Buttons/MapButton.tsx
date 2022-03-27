@@ -1,6 +1,6 @@
 import React from 'react';
-import style from 'components/Buttons/MapButton.module.css';
 import classNames from 'classnames';
+import {Button} from '@vkontakte/vkui';
 
 export interface MapButtonProps {
   className?: string;
@@ -15,13 +15,8 @@ export const MapButton: React.FC<MapButtonProps> = ({
   onClick,
 }) => {
   return (
-    <button
-      className={classNames(className, style.button, {
-        [style.active]: isActive,
-      })}
-      onClick={onClick}
-    >
+    <Button onClick={onClick} className={classNames(className)}>
       {children}
-    </button>
+    </Button>
   );
 };
