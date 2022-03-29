@@ -1,8 +1,75 @@
+:root {
+    --select-spacing: 30px;
+    --margin-top: 25px;
+}
+
 .container {
-    width: 800px;
-    height: 600px;
+    border-radius: 20px;
+    padding: var(--select-spacing) 70px;
+    background: var(--secondary-color);
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .header {
+    color: white;
+    text-align: left;
+    composes: font__title2_playfair from global;
+}
 
+.box {
+    margin-top: var(--margin-top);
+    width: 100%;
+    min-height: 44px;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+}
+
+.select + .select {
+    margin-left: var(--select-spacing);
+}
+
+.select {
+    max-width: 310px;
+    width: 30%;
+}
+
+.date {
+    max-width: 310px;
+    width: 30%;
+}
+
+.centerSelect {
+    max-width: none;
+    flex: 1;
+}
+
+.chipSelect {
+    max-height: 44px;
+    min-height: 44px;
+    position: relative;
+    margin-left: var(--select-spacing);
+    flex: 1;
+}
+
+.textarea {
+    flex: 1;
+}
+
+.submit {
+    background: rgba(179, 179, 179, 0.18);
+    width: 155px;
+    margin: 25px auto 0;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    border: 1px solid #BFBFBF;
+    box-sizing: border-box;
+    border-radius: 6px;
+    color: #707070;
 }

@@ -22,6 +22,7 @@ export interface MapProps {
   currentLinePoints: LatLng[];
   setCurrentLinePoints: Setter<LatLng[]>;
   setSelectedLabel: Setter<Nullable<IMarker>>;
+  className?: string;
 }
 
 export const Map: React.FC<MapProps> = ({
@@ -34,6 +35,7 @@ export const Map: React.FC<MapProps> = ({
   setCurrentLinePoints,
   setSelectedLabel,
   editable,
+  className,
 }) => {
   const [isActiveLabel, setIsActiveLabel] = useState<boolean>(false);
   const [isActiveLine, setIsActiveLine] = useState<boolean>(false);
@@ -96,7 +98,7 @@ export const Map: React.FC<MapProps> = ({
 
   if (!editable) {
     return (
-      <div className={style.container}>
+      <div className={classNames(style.container, className)}>
         <MapContainer
           className={style.mapContainer}
           center={initCenter}
@@ -126,7 +128,7 @@ export const Map: React.FC<MapProps> = ({
   }
 
   return (
-    <div className={style.container}>
+    <div className={classNames(style.container, className)}>
       <MapContainer
         className={style.mapContainer}
         center={initCenter}
@@ -152,22 +154,21 @@ export const Map: React.FC<MapProps> = ({
         ))}
         <Line points={currentLinePoints} />
       </MapContainer>
-      <div className={classNames(style.inspector, style.overMapObject)}>
-        <Inspector
-          currentLabels={currentLabels}
-          currentLinePoints={currentLinePoints}
-          deletedLinePoints={deletedLinePoints}
-          deletedLabels={deletedLabels}
-          setCurrentLabels={setCurrentLabels}
-          setCurrentLinePoints={setCurrentLinePoints}
-          setDeletedLabels={setDeletedLabels}
-          setDeletedLinePoints={setDeletedLinePoints}
-          isActiveLabel={isActiveLabel}
-          isActiveLine={isActiveLine}
-          setIsActiveLabel={setIsActiveLabel}
-          setIsActiveLine={setIsActiveLine}
-        />
-      </div>
+      <Inspector
+        currentLabels={currentLabels}
+        currentLinePoints={currentLinePoints}
+        deletedLinePoints={deletedLinePoints}
+        deletedLabels={deletedLabels}
+        setCurrentLabels={setCurrentLabels}
+        setCurrentLinePoints={setCurrentLinePoints}
+        setDeletedLabels={setDeletedLabels}
+        setDeletedLinePoints={setDeletedLinePoints}
+        isActiveLabel={isActiveLabel}
+        isActiveLine={isActiveLine}
+        setIsActiveLabel={setIsActiveLabel}
+        setIsActiveLine={setIsActiveLine}
+        className={classNames(style.inspector, style.overMapObject)}
+      />
     </div>
   );
 };

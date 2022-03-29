@@ -5,4 +5,5 @@ export interface IMarker {
   description?: string;
   position: LatLng;
   icon?: Icon;
+  photos?: string[];
 }

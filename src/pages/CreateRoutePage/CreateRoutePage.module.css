@@ -1,39 +1,61 @@
 :root {
+    --header-height: calc(20px + 60px);
     --map-right-margin: 30px;
 
     --options-width: 270px;
+    --create-form-margin-top: 40px;
+    --create-form-height: 500px + var(--create-form-margin-top);
+
 }
 
-.contentContainer {
-    width: calc(100% - 80px);
-    height: calc(200% - 175px);
+.container {
+    width: 100%;
+    height: calc(100% + var(--create-form-height));
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.header {
+    margin-top: 20px;
+}
+
+.content {
+    width: 100%;
+    height: calc(100% - 20px);
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+    position: relative;
+}
+
+.mapContainer {
     display: flex;
     flex-direction: row;
-    position: absolute;
-    margin-top: 155px;
+    height: calc(100% - var(--create-form-height) - calc(var(--create-form-margin-top) / 2) - var(--header-height));
+    width: 100%;
 }
 
 .map {
-    height: 50%;
-    width: calc(100% - var(--options-width) - var(--map-right-margin));
-    position: absolute;
-    margin-right: 30px;
+    height: 100%;
+    min-width: calc(100% - var(--options-width) - var(--map-right-margin));
+    margin-right: var(--map-right-margin);
+    display: flex;
 }
 
 .options {
-    height: 50%;
+    height: 100%;
     width: var(--options-width);
     border-radius: 20px;
     overflow: hidden;
-    position: absolute;
-    right: 0;
-    background-color: rgb(183 181 181 / 40%);
+    display: flex;
+    background: var(--secondary-color);
     padding: 20px 10px;
 }
 
 .createForm {
-    height: 50%;
+    margin-top: var(--create-form-margin-top);
+    height: var(--create-form-height);
     width: 100%;
-    position: absolute;
-    top: 50%;
 }

@@ -5,6 +5,14 @@
     display: flex;
     justify-content: left;
     align-items: center;
-
     flex-direction: column;
+
+    height: 100%;
+    position: absolute;
+}
+
+.page {
+    margin-top: 55px;
+    height: 100%;
+    width: 100%;
 }

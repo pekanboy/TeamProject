@@ -22,7 +22,16 @@
     font-style: normal;
     font-weight: 700;
     font-size: 48px;
-    line-height: 26px;
+    line-height: 48px;
+}
+
+.font__title2_playfair {
+    font-family: 'Playfair Display', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 53px;
+    text-align: center;
 }
 
 .font__text2_montserrat {

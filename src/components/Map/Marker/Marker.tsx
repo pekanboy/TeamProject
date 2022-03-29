@@ -12,7 +12,7 @@ export interface MarkerProps extends IMarker {
 
 const markerLabel = new Icon({
   iconUrl: icon,
-  iconSize: [16, 27],
+  iconSize: [23, 27],
   iconAnchor: [0, 27],
 });
 

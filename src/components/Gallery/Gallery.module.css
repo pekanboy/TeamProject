@@ -1,0 +1,25 @@
+.filePicker {
+    max-width: 240px;
+    width: calc(25% - var(--select-spacing));
+    height: 200px;
+}
+
+.gallery {
+    border-radius: 16px;
+    overflow: hidden;
+    margin-left: var(--select-spacing);
+    height: 200px;
+    flex: 1
+}
+
+.img {
+    height: 200px;
+    width: 240px;
+    object-fit: cover;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.container {
+    width: 100%;
+}

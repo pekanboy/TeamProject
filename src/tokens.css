@@ -21,3 +21,7 @@
 .vkuiFormField:focus-within, vkuiFormField__border, .vkuiFormField :focus~.vkuiFormField__border, .vkuiChipsInput--focused .vkuiFormField__border {
     border-color: #3e8e41 !important;
 }
+
+.vkuiCustomSelectDropdown__options {
+    z-index: 600 !important;
+}

@@ -1,14 +1,14 @@
-@import "@vkontakte/vkui-tokens/themes/vkBase/cssVars/declarations/index.css";
+@import '@vkontakte/vkui-tokens/themes/vkBase/cssVars/declarations/index.css';
+@import '@vkontakte/vkui/dist/unstable.css';
 @import 'fonts.css';
 @import 'tokens.css';
 
 /* Переопределяем токены */
 :root {
-
+    --secondary-color: rgb(245, 245, 245);
+    --button_secondary_foreground: #707070 !important;
+    /*--button_primary_foreground:*/
 }
-
-
-
 
 
 /* Указываем box sizing */

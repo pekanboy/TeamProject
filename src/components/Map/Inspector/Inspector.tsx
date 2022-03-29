@@ -1,10 +1,12 @@
-import {MapButton} from 'components/Buttons/MapButton';
-import classNames from 'classnames';
+import {MapButton} from 'components/Buttons/MapButton/MapButton';
 import style from 'components/Map/Inspector/Inspector.module.css';
 import React from 'react';
 import {Setter} from 'types/basic';
 import {IMarker} from 'components/Map/Marker/Marker.interface';
 import {LatLng} from 'leaflet';
+import flag from 'image/flag.svg';
+import marker from 'image/marker.svg';
+import classNames from 'classnames';
 
 export interface InspectorProps {
   isActiveLabel: boolean;
@@ -19,6 +21,7 @@ export interface InspectorProps {
   setDeletedLabels: Setter<IMarker[]>;
   deletedLinePoints: LatLng[];
   setDeletedLinePoints: Setter<LatLng[]>;
+  className?: string;
 }
 
 export const Inspector: React.FC<InspectorProps> = ({
@@ -34,6 +37,7 @@ export const Inspector: React.FC<InspectorProps> = ({
   deletedLabels,
   setDeletedLinePoints,
   setDeletedLabels,
+  className,
 }) => {
   const handleClickLabelButton = () => {
     setIsActiveLabel((prev) => !prev);
@@ -90,21 +94,19 @@ export const Inspector: React.FC<InspectorProps> = ({
     }
   };
   return (
-    <div className={style.container}>
+    <div className={classNames(style.container, className)}>
       <MapButton
+        icon={flag}
         className={style.button}
         isActive={isActiveLabel}
         onClick={handleClickLabelButton}
-      >
-        Метка
-      </MapButton>
+      />
       <MapButton
+        icon={marker}
         className={style.button}
         isActive={isActiveLine}
         onClick={handleClickLineButton}
-      >
-        Линия
-      </MapButton>
+      />
       <MapButton className={style.button} onClick={onBackPressed}>
         Назад
       </MapButton>
