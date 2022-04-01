@@ -52,18 +52,18 @@ export const CreateRouteForm: React.FC<CreateRouteFormProps> = ({
   const descRef = useRef<HTMLTextAreaElement>();
 
   const onSubmit = () => {
-    debugger;
     onCreateRoute?.({
       title: titleRef.current?.value || '',
       difficult: Number(difficultRef.current?.value),
       type: typeRef.current?.value || '',
       region: regionRef.current?.value || '',
-      travelTime: Number(daysRef.current?.value),
+      days: Number(daysRef.current?.value),
       description: descRef.current?.value || '',
       routePoints: [],
       markers: [],
       needModerate: false,
       bestTimeToGo: 'Лето', // Todo
+      things: [],
     });
   };
 

@@ -15,21 +15,17 @@ export const MapButton: React.FC<MapButtonProps> = ({
   className,
   isActive,
   iconClass,
-  children,
   onClick,
   icon,
 }) => {
   return (
     <IconButton
-      icon={
-        icon && <img className={classNames(iconClass, style.icon)} src={icon} />
-      }
       onClick={onClick}
       className={classNames(style.button, className, {
         [style.active]: isActive,
       })}
     >
-      {children}
+      {icon && <img className={classNames(iconClass, style.icon)} src={icon} />}
     </IconButton>
   );
 };

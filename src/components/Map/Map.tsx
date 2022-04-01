@@ -7,7 +7,6 @@ import {Line} from 'components/Map/Line/Line';
 import {Nullable, Setter} from 'types/basic';
 import {IMarker} from 'components/Map/Marker/Marker.interface';
 import {toCenter} from 'components/Map/Map.helpers';
-import {useEffectEveryOnce} from 'hooks/useEffectEveryOnce';
 import {findMarker} from 'components/Map/Marker/Marker.helpers';
 import {Inspector} from 'components/Map/Inspector/Inspector';
 import classNames from 'classnames';
@@ -18,9 +17,9 @@ export interface MapProps {
   map: Nullable<LeafletMap>;
   setMap: Setter<Nullable<LeafletMap>>;
   currentLabels: IMarker[];
-  setCurrentLabels: Setter<IMarker[]>;
+  setCurrentLabels?: Setter<IMarker[]>;
   currentLinePoints: LatLng[];
-  setCurrentLinePoints: Setter<LatLng[]>;
+  setCurrentLinePoints?: Setter<LatLng[]>;
   setSelectedLabel: Setter<Nullable<IMarker>>;
   className?: string;
 }
@@ -44,14 +43,11 @@ export const Map: React.FC<MapProps> = ({
   const [deletedLabels, setDeletedLabels] = useState<IMarker[]>([]);
   const [deletedLinePoints, setDeletedLinePoints] = useState<LatLng[]>([]);
 
-  // отвечает за зум к началу линии
-  useEffectEveryOnce(() => {
-    map?.setZoom(12);
-  }, [currentLinePoints.length !== 0]);
-
   // при добавлении точек к линии перемещает центр к последней точке
   useEffect(() => {
-    map && toCenter(map, currentLinePoints[currentLinePoints.length - 1]);
+    map &&
+      currentLinePoints.length &&
+      toCenter(map, currentLinePoints[currentLinePoints.length - 1]);
   }, [currentLinePoints.length]);
 
   // эффект, который отвечает за переключение режимов "Метка", "Линия"
@@ -66,11 +62,11 @@ export const Map: React.FC<MapProps> = ({
           position: latlng,
         };
 
-        setCurrentLabels((prev) => [...prev, point]);
+        setCurrentLabels?.((prev) => [...prev, point]);
         setSelectedLabel(point);
         setDeletedLabels([]);
       } else if (isActiveLine) {
-        setCurrentLinePoints((prev) => [...prev, latlng]);
+        setCurrentLinePoints?.((prev) => [...prev, latlng]);
         setDeletedLinePoints([]);
       }
     });
@@ -104,7 +100,7 @@ export const Map: React.FC<MapProps> = ({
           center={initCenter}
           zoomControl={false}
           zoom={7}
-          maxZoom={15}
+          maxZoom={18}
           minZoom={4}
           whenCreated={whenMapCreated}
         >
@@ -135,7 +131,7 @@ export const Map: React.FC<MapProps> = ({
         zoomControl={false}
         zoom={7}
         maxZoom={15}
-        minZoom={4}
+        minZoom={3}
         whenCreated={whenMapCreated}
       >
         <TileLayer
@@ -155,12 +151,14 @@ export const Map: React.FC<MapProps> = ({
         <Line points={currentLinePoints} />
       </MapContainer>
       <Inspector
+        map={map}
         currentLabels={currentLabels}
         currentLinePoints={currentLinePoints}
         deletedLinePoints={deletedLinePoints}
         deletedLabels={deletedLabels}
-        setCurrentLabels={setCurrentLabels}
-        setCurrentLinePoints={setCurrentLinePoints}
+        // Todo удалить !
+        setCurrentLabels={setCurrentLabels!}
+        setCurrentLinePoints={setCurrentLinePoints!}
         setDeletedLabels={setDeletedLabels}
         setDeletedLinePoints={setDeletedLinePoints}
         isActiveLabel={isActiveLabel}

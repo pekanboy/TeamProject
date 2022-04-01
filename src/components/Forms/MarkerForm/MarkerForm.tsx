@@ -10,6 +10,7 @@ import {
 import {IMarker} from 'components/Map/Marker/Marker.interface';
 import {LatLng} from 'leaflet';
 import {CustomFormItem} from 'components/Forms/CustomFormItem/CustomFormItem';
+import style from 'components/Forms/MarkerForm/MarkerForm.module.css';
 
 export interface MarkerFormProps {
   label: IMarker;
@@ -97,9 +98,13 @@ export const MarkerForm: React.FC<MarkerFormProps> = ({
         </CustomFormItem>
       </FormGroup>
       <CustomFormItem>
-        <ButtonGroup mode={'horizontal'}>
-          <Button onClick={submitHandler}>Сохранить</Button>
-          <Button onClick={close}>Отменить</Button>
+        <ButtonGroup mode={'horizontal'} className={style.submitContainer}>
+          <Button onClick={submitHandler} className={style.submit}>
+            Сохранить
+          </Button>
+          <Button onClick={close} className={style.submit}>
+            Отменить
+          </Button>
         </ButtonGroup>
       </CustomFormItem>
     </Form>

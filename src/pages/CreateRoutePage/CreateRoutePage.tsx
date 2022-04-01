@@ -1,5 +1,5 @@
 import {Map} from 'components/Map/Map';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {LatLng, Map as LeafletMap} from 'leaflet';
 import {Nullable} from 'types/basic';
 import {Header} from 'components/Header/Header/Header';
@@ -9,16 +9,29 @@ import {CreateRouteForm} from 'components/Forms/CreateRouteForm/CreateRouteForm'
 import {useRouteProvider} from 'providers/RouteProvider';
 import {useSelectedLabel} from 'hooks/useSelectedLabel';
 import {IRoute} from 'interfaces/IRoute';
+import {useCreateRoute} from 'hooks/axios/useCreateRoute';
 
 export const CreateRoutePage = () => {
   const {
     currentLabels,
     setCurrentLabels,
-    route,
     setRoute,
     currentLinePoints,
     setCurrentLinePoints,
   } = useRouteProvider();
+  const createRoute = useCreateRoute(
+    (route) => {
+      setCurrentLabels([]);
+      setCurrentLinePoints([]);
+      setRoute(route);
+    },
+    (error, code) => {
+      console.error(
+        `Create Route request filed. Code: ${code}. Message: ${error}`,
+      );
+    },
+  );
+
   const initCenter: LatLng = new LatLng(55.5807481, 36.8251304);
 
   const [map, setMap] = useState<Nullable<LeafletMap>>(null);
@@ -26,7 +39,7 @@ export const CreateRoutePage = () => {
     useSelectedLabel({currentLabels, setCurrentLabels});
 
   const onCreateRoute = (newRoute: IRoute) => {
-    setRoute({
+    createRoute({
       ...newRoute,
       markers: currentLabels,
       routePoints: currentLinePoints,

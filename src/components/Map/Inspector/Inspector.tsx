@@ -1,12 +1,16 @@
 import {MapButton} from 'components/Buttons/MapButton/MapButton';
 import style from 'components/Map/Inspector/Inspector.module.css';
 import React from 'react';
-import {Setter} from 'types/basic';
+import {Nullable, Setter} from 'types/basic';
 import {IMarker} from 'components/Map/Marker/Marker.interface';
-import {LatLng} from 'leaflet';
-import flag from 'image/flag.svg';
-import marker from 'image/marker.svg';
+import {LatLng, Map as LeafletMap} from 'leaflet';
+import flag from 'image/flagGray.svg';
+import marker from 'image/markerGray.svg';
+import next from 'image/next.svg';
+import back from 'image/back.svg';
+import moveTo from 'image/moveTo.svg';
 import classNames from 'classnames';
+import {toCenter} from 'components/Map/Map.helpers';
 
 export interface InspectorProps {
   isActiveLabel: boolean;
@@ -22,6 +26,7 @@ export interface InspectorProps {
   deletedLinePoints: LatLng[];
   setDeletedLinePoints: Setter<LatLng[]>;
   className?: string;
+  map: Nullable<LeafletMap>;
 }
 
 export const Inspector: React.FC<InspectorProps> = ({
@@ -38,6 +43,7 @@ export const Inspector: React.FC<InspectorProps> = ({
   setDeletedLinePoints,
   setDeletedLabels,
   className,
+  map,
 }) => {
   const handleClickLabelButton = () => {
     setIsActiveLabel((prev) => !prev);
@@ -49,10 +55,26 @@ export const Inspector: React.FC<InspectorProps> = ({
     setIsActiveLabel(false);
   };
 
+  const handleMoveTo = () => {
+    map?.setZoom(14);
+
+    if (isActiveLabel) {
+      map &&
+        currentLabels.length &&
+        toCenter(map, currentLabels[currentLabels.length - 1].position);
+    }
+
+    if (isActiveLine) {
+      map &&
+        currentLinePoints.length &&
+        toCenter(map, currentLinePoints[currentLinePoints.length - 1]);
+    }
+  };
+
   const onBackPressed = () => {
     if (isActiveLabel && currentLabels.length) {
       const [lastLabel, ...otherLabels] = currentLabels.reverse();
-      setCurrentLabels(otherLabels.reverse());
+      setCurrentLabels(otherLabels?.reverse() || []);
       setDeletedLabels((prevDeletedLabels) => [
         lastLabel,
         ...prevDeletedLabels,
@@ -63,7 +85,7 @@ export const Inspector: React.FC<InspectorProps> = ({
 
     if (isActiveLine && currentLinePoints.length) {
       const [lastLinePoint, ...otherLinePoints] = currentLinePoints.reverse();
-      setCurrentLinePoints(otherLinePoints.reverse());
+      setCurrentLinePoints(otherLinePoints?.reverse() || []);
       setDeletedLinePoints((prevDeletedLinePoints) => [
         lastLinePoint,
         ...prevDeletedLinePoints,
@@ -107,12 +129,13 @@ export const Inspector: React.FC<InspectorProps> = ({
         isActive={isActiveLine}
         onClick={handleClickLineButton}
       />
-      <MapButton className={style.button} onClick={onBackPressed}>
-        Назад
-      </MapButton>
-      <MapButton className={style.button} onClick={onNextPressed}>
-        Вперед
-      </MapButton>
+      <MapButton
+        icon={moveTo}
+        className={style.button}
+        onClick={handleMoveTo}
+      />
+      <MapButton icon={back} className={style.button} onClick={onBackPressed} />
+      <MapButton icon={next} className={style.button} onClick={onNextPressed} />
     </div>
   );
 };

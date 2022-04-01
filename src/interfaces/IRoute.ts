@@ -5,12 +5,13 @@ export interface IRoute {
   bestTimeToGo?: string;
   climb?: number;
   // Todo user
-  travelTime: number;
+  days: number;
   description: string;
   difficult: number;
   needModerate: boolean;
   title: string;
   region: string;
+  things: string[];
 
   markers: IMarker[];
   routePoints: LatLng[];
@@ -19,17 +20,19 @@ export interface IRoute {
 }
 
 export const defaultRoute: IRoute = {
-  bestTimeToGo: '',
-  climb: 0,
-  travelTime: 0,
-  description: '',
-  difficult: 0,
+  bestTimeToGo: 'Лето',
+  climb: 123,
+  days: 3,
+  description:
+    'Повседневная практика показывает, что постоянное информационно-пропагандистское обеспечение нашей деятельности играет важную роль в формировании позиций, занимаемых участниками в отношении поставленных задач. Повседневная практика показывает, что консультация с широким активом играет важную роль в формировании направлений прогрессивного развития... Повседневная практика показывает, что консультация с широким активом играет важную роль в формировании направлений прогрессивного развития... ',
+  difficult: 4,
   needModerate: false,
-  title: '',
-  region: '',
+  title: 'Тропы оленей',
+  region: 'Москва',
+  things: [],
 
   markers: [],
   routePoints: [],
 
-  type: '',
+  type: 'Пеший',
 };

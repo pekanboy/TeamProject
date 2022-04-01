@@ -36,8 +36,9 @@ export const Gallery: React.FC<GalleryProps> = ({
         slideWidth={slideWith}
         isDraggable={true}
         showArrows={true}
+        bullets="dark"
       >
-        {result.map((src: string | undefined) => {
+        {result.map((src?: string) => {
           return (
             <img
               className={style.img}

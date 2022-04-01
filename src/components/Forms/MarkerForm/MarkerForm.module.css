@@ -1,0 +1,11 @@
+.submitContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.submit {
+    background: rgba(54, 143, 57, 0.68) !important;
+    width: 120px;
+    height: 42px;
+}

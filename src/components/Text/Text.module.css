@@ -2,10 +2,18 @@
     composes: font__logo from global;
 }
 
-.lite {
+.text3 {
     composes: font__title3_montserrat from global;
+}
+
+.text2 {
+    composes: font__text2_montserrat from global;
 }
 
 .title1 {
     composes: font__title1_playfair from global;
+}
+
+.title2 {
+    composes: font__title2_playfair from global;
 }

@@ -7,7 +7,8 @@
 :root {
     --secondary-color: rgb(245, 245, 245);
     --button_secondary_foreground: #707070 !important;
-    /*--button_primary_foreground:*/
+    --button_primary_foreground: rgba(160, 253, 160, 0.47);
+    --button_primary_background: rgba(160, 253, 160, 0.47);
 }
 
 

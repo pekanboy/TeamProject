@@ -25,9 +25,11 @@ export const RouteProviderContext =
   });
 
 export const RouteProvider: React.FC = ({children}) => {
+  // Cостояния которые изменяются только при создании маршрута
   const [currentLabels, setCurrentLabels] = useState<IMarker[]>([]);
   const [currentLinePoints, setCurrentLinePoints] = useState<LatLng[]>([]);
 
+  // Тут лежит текущий открытый маршрут
   const [route, setRoute] = useState<IRoute>(defaultRoute);
 
   const contextValue = {

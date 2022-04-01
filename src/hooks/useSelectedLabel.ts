@@ -4,7 +4,7 @@ import {IMarker} from 'components/Map/Marker/Marker.interface';
 
 export interface useSelectedLabelProps {
   currentLabels: IMarker[];
-  setCurrentLabels: Setter<IMarker[]>;
+  setCurrentLabels?: Setter<IMarker[]>;
 }
 
 export const useSelectedLabel = ({
@@ -20,7 +20,7 @@ export const useSelectedLabel = ({
   }, [currentLabels.length]);
 
   const onChangeLabel = (newLabel: IMarker, needClose = false) => {
-    setCurrentLabels(
+    setCurrentLabels?.(
       currentLabels.map((label) => {
         if (label.position.equals(newLabel.position)) {
           return newLabel;
