@@ -14,7 +14,7 @@ const DEFAULT_POSITION = new LatLng(32, 23);
 
 export const RoutePage: React.FC = () => {
   const {id} = useParams();
-  const {route, loading, error} = useGetRoute(Number(id));
+  const {route} = useGetRoute(Number(id));
   console.log(id);
   const [map, setMap] = useState<Nullable<LeafletMap>>(null);
   const {selectedLabel, setSelectedLabel} = useSelectedLabel({

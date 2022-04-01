@@ -1,28 +1,24 @@
 import {IRoute} from 'interfaces/IRoute';
-import useAxios from 'axios-hooks';
-import {useMemo} from 'react';
-import {URLToSendRequests} from 'configs/base.const';
+import {createRoutePath, URLToSendRequests} from 'configs/base.const';
+import {customAxios} from 'hooks/axios/customAxios';
 
 export const useCreateRoute = (
   onSuccess: (data: any) => void,
   onError: (x: string, y: number) => void,
 ) => {
-  return (route: IRoute) => {
-    useMemo(() => {
-      const [{data, error}] = useAxios({
-        url: `${URLToSendRequests}/route`,
-        data: mapRouteForApiView(route),
-      });
+  return async (route: IRoute) => {
+    const {data, error, code} = await customAxios({
+      url: `${URLToSendRequests}${createRoutePath}`,
+      data: mapRouteForApiView(route),
+      method: 'POST',
+    });
 
-      if (error) {
-        onError(error.name, Number(error.code));
-      }
+    if (error) {
+      onError(error, code);
+      return;
+    }
 
-      if (data) {
-        console.log(data);
-        onSuccess(data);
-      }
-    }, [route, onSuccess, onError]);
+    onSuccess(data);
   };
 };
 

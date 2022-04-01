@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import {Button, Input} from '@vkontakte/vkui';
 import gallery from 'image/gallery.svg';
 import {Text, TextMode} from 'components/Text/Text';

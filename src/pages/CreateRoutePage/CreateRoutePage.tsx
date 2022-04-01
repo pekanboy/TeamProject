@@ -10,6 +10,7 @@ import {useRouteProvider} from 'providers/RouteProvider';
 import {useSelectedLabel} from 'hooks/useSelectedLabel';
 import {IRoute} from 'interfaces/IRoute';
 import {useCreateRoute} from 'hooks/axios/useCreateRoute';
+import {useAltitude} from 'hooks/axios/useAltitude';
 
 export const CreateRoutePage = () => {
   const {
@@ -31,6 +32,16 @@ export const CreateRoutePage = () => {
       );
     },
   );
+  const getAltitude = useAltitude(
+    (data) => {
+      console.log(data);
+    },
+    (error, code) => {
+      console.error(
+        `Get altitude request filed. Code: ${code}. Message: ${error}`,
+      );
+    },
+  );
 
   const initCenter: LatLng = new LatLng(55.5807481, 36.8251304);
 
@@ -39,10 +50,13 @@ export const CreateRoutePage = () => {
     useSelectedLabel({currentLabels, setCurrentLabels});
 
   const onCreateRoute = (newRoute: IRoute) => {
-    createRoute({
-      ...newRoute,
-      markers: currentLabels,
-      routePoints: currentLinePoints,
+    getAltitude(currentLinePoints).then((data) => {
+      console.log('---', data);
+      createRoute({
+        ...newRoute,
+        markers: currentLabels,
+        routePoints: currentLinePoints,
+      });
     });
   };
 

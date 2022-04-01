@@ -1,22 +1,26 @@
 import {LatLng} from 'leaflet';
-import useAxios from 'axios-hooks';
 import {AltitudeGetURL} from 'configs/base.const';
+import {customAxios} from 'hooks/axios/customAxios';
 
 export const useAltitude = (
   onSuccess: (data: any) => void,
   onError: (x: string, y: number) => void,
 ) => {
-  return (positions: LatLng[]) => {
-    const [{data, error}] = useAxios(createAltitudeURL(positions));
+  return async (positions: LatLng[]) => {
+    const {data, error, code} = await customAxios({
+      url: createAltitudeURL(positions),
+    });
 
     if (error) {
-      onError(error.name, Number(error.code));
+      onError(error, Number(code));
+      return null;
     }
 
     if (data) {
-      console.log(data);
-      return data;
+      onSuccess(data);
     }
+
+    return data;
   };
 };
 
