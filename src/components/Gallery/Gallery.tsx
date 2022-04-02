@@ -5,19 +5,26 @@ import React, {useEffect} from 'react';
 import {useDisplayImage} from 'hooks/useDisplayImage';
 import {Gallery as GalleryComponent} from '@vkontakte/vkui';
 import classNames from 'classnames';
+import {Setter} from 'types/basic';
 
 export interface GalleryProps {
   onChangeGallery?: (x: any[]) => void;
   className?: string;
   slideWith: number;
+  result: string[];
+  setResult?: Setter<string[]>;
+  needPicker?: boolean;
 }
 
 export const Gallery: React.FC<GalleryProps> = ({
   onChangeGallery,
   className,
   slideWith,
+  result,
+  setResult,
+  needPicker = true,
 }) => {
-  const {result, uploader} = useDisplayImage();
+  const {uploader} = useDisplayImage(setResult);
 
   useEffect(() => {
     onChangeGallery?.(result);
@@ -25,19 +32,23 @@ export const Gallery: React.FC<GalleryProps> = ({
 
   return (
     <CustomFormItem className={classNames(style.container, className)}>
-      <ImagePickerButton
-        className={style.filePicker}
-        setImage={(files) => {
-          uploader(files);
-        }}
-      />
+      {needPicker && (
+        <ImagePickerButton
+          className={style.filePicker}
+          setImage={(files) => {
+            uploader(files);
+          }}
+        />
+      )}
       <GalleryComponent
         className={style.gallery}
         slideWidth={slideWith}
         isDraggable={true}
         showArrows={true}
-        bullets="dark"
       >
+        {!result.length && (
+          <div className={style.noPhoto}>Фотографии не выбраны</div>
+        )}
         {result.map((src?: string) => {
           return (
             <img

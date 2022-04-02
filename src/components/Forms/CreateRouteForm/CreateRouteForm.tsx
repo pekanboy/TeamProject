@@ -13,10 +13,10 @@ import {
   routeTypesPool,
   regionsPool,
   commonThingsPool,
+  niceTime,
 } from 'components/Forms/CreateRouteForm/CreateRouteForm.const';
 import classNames from 'classnames';
 import {ChipsInputOption} from '@vkontakte/vkui/dist/components/ChipsInput/ChipsInput';
-import {CustomFormItem} from 'components/Forms/CustomFormItem/CustomFormItem';
 import {Gallery} from 'components/Gallery/Gallery';
 import {IRoute} from 'interfaces/IRoute';
 
@@ -50,8 +50,12 @@ export const CreateRouteForm: React.FC<CreateRouteFormProps> = ({
   const daysRef = useRef<HTMLInputElement>();
   const thingsRef = useRef<HTMLInputElement>();
   const descRef = useRef<HTMLTextAreaElement>();
+  const niceTimeRef = useRef<HTMLSelectElement>();
+  const [result, setResult] = React.useState<string[]>([]);
 
   const onSubmit = () => {
+    // Todo Прикрутить валидацию
+
     onCreateRoute?.({
       title: titleRef.current?.value || '',
       difficult: Number(difficultRef.current?.value),
@@ -62,65 +66,79 @@ export const CreateRouteForm: React.FC<CreateRouteFormProps> = ({
       routePoints: [],
       markers: [],
       needModerate: false,
-      bestTimeToGo: 'Лето', // Todo
-      things: [],
+      bestTimeToGo: niceTimeRef.current?.value,
+      things: thingsRef.current?.value?.split('\n') || [],
+      distance: 0,
+      photos: result,
     });
   };
 
   return (
-    <div className={classNames(style.container, className)}>
+    <div className={classNames(className, style.container)}>
       <Input
         getRef={(ref) => (titleRef.current = ref || undefined)}
         type={'text'}
         className={style.header}
         placeholder={'Введите название маршрута'}
         value={title}
+        role={'cell'}
       />
       <FormLayoutGroup className={style.box} mode={'horizontal'}>
-        <CustomSelect
-          getRef={(ref) => (difficultRef.current = ref || undefined)}
-          placeholder={'Выберите сложность'}
-          className={style.select}
-          options={difficultPool}
-        />
-        <CustomSelect
-          placeholder={'Выберите тип маршрута'}
-          getRef={(ref) => (typeRef.current = ref || undefined)}
-          className={classNames(style.select, style.centerSelect)}
-          options={routeTypesPool}
-        />
-        <CustomSelect
-          className={style.select}
-          getRef={(ref) => (regionRef.current = ref || undefined)}
-          placeholder={'Выберите регион'}
-          options={regionsPool}
-        />
+        <FormLayoutGroup className={style.leftColumn} mode={'vertical'}>
+          <CustomSelect
+            getRef={(ref) => (difficultRef.current = ref || undefined)}
+            placeholder={'Выберите сложность'}
+            className={style.select}
+            options={difficultPool}
+          />
+          <CustomSelect
+            placeholder={'Выберите тип маршрута'}
+            getRef={(ref) => (typeRef.current = ref || undefined)}
+            className={classNames(style.select, style.centerSelect)}
+            options={routeTypesPool}
+          />
+          <CustomSelect
+            className={style.select}
+            getRef={(ref) => (regionRef.current = ref || undefined)}
+            placeholder={'Выберите регион'}
+            options={regionsPool}
+          />
+          <CustomSelect
+            className={style.select}
+            getRef={(ref) => (niceTimeRef.current = ref || undefined)}
+            placeholder={'Наилучший сезон'}
+            options={niceTime}
+          />
+          <Input
+            getRef={(ref) => (daysRef.current = ref || undefined)}
+            type={'number'}
+            placeholder={'Количество дней маршрута'}
+            className={style.days}
+          />
+        </FormLayoutGroup>
+        <FormLayoutGroup mode={'vertical'} className={style.rightColumn}>
+          <ChipsSelect
+            getRef={(ref) => (thingsRef.current = ref || undefined)}
+            className={style.chipSelect}
+            {...thingsChipsProps}
+          />
+          <Textarea
+            getRef={(ref) => (descRef.current = ref || undefined)}
+            placeholder={'Введите описание маршрута'}
+            grow={false}
+            autoFocus={true}
+            className={style.textarea}
+          />
+        </FormLayoutGroup>
       </FormLayoutGroup>
-      <FormLayoutGroup mode={'horizontal'} className={style.box}>
-        <Input
-          getRef={(ref) => (daysRef.current = ref || undefined)}
-          type={'number'}
-          placeholder={'Количество дней маршрута'}
-          className={style.date}
-        />
-        <ChipsSelect
-          getRef={(ref) => (thingsRef.current = ref || undefined)}
-          className={style.chipSelect}
-          {...thingsChipsProps}
-        />
-      </FormLayoutGroup>
-      <CustomFormItem className={style.box}>
-        <Textarea
-          getRef={(ref) => (descRef.current = ref || undefined)}
-          placeholder={'Введите описание маршрута'}
-          rows={5}
-          grow={false}
-          className={style.textarea}
-        />
-      </CustomFormItem>
-      <Gallery className={style.box} slideWith={270} />
+      <Gallery
+        className={style.box}
+        slideWith={270}
+        result={result}
+        setResult={setResult}
+      />
       <Button mode={'secondary'} className={style.submit} onClick={onSubmit}>
-        Опубликовать
+        ОПУБЛИКОВАТЬ
       </Button>
     </div>
   );

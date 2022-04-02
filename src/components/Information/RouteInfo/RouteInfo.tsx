@@ -15,7 +15,7 @@ export const RouteInfo: React.FC<RouteInfoProps> = ({
   route,
   selectedLabel,
 }) => {
-  const {title, difficult, days, type, bestTimeToGo, description} = route;
+  const {title, difficult, days, type, bestTimeToGo} = route;
 
   return (
     <div className={style.container}>
@@ -43,9 +43,6 @@ export const RouteInfo: React.FC<RouteInfoProps> = ({
             Лучшее время: {bestTimeToGo}
           </Text>
         </div>
-        <Text mode={TextMode.TEXT_2} className={style.description}>
-          {description}
-        </Text>
       </div>
     </div>
   );

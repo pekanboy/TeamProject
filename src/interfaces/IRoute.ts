@@ -12,11 +12,17 @@ export interface IRoute {
   title: string;
   region: string;
   things: string[];
+  distance: number;
+
+  photos: string[];
 
   markers: IMarker[];
   routePoints: LatLng[];
 
   type: string;
+
+  id?: number;
+  start?: LatLng;
 }
 
 export const defaultRoute: IRoute = {
@@ -30,6 +36,9 @@ export const defaultRoute: IRoute = {
   title: 'Тропы оленей',
   region: 'Москва',
   things: [],
+  distance: 0,
+
+  photos: [],
 
   markers: [],
   routePoints: [],

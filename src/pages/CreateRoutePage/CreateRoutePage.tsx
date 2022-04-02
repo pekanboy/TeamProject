@@ -1,23 +1,31 @@
 import {Map} from 'components/Map/Map';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {LatLng, Map as LeafletMap} from 'leaflet';
 import {Nullable} from 'types/basic';
 import {Header} from 'components/Header/Header/Header';
 import style from 'pages/CreateRoutePage/CreateRoutePage.module.css';
-import {MarkerForm} from 'components/Forms/MarkerForm/MarkerForm';
 import {CreateRouteForm} from 'components/Forms/CreateRouteForm/CreateRouteForm';
 import {useRouteProvider} from 'providers/RouteProvider';
 import {useSelectedLabel} from 'hooks/useSelectedLabel';
 import {IRoute} from 'interfaces/IRoute';
 import {useCreateRoute} from 'hooks/axios/useCreateRoute';
 import {useAltitude} from 'hooks/axios/useAltitude';
+import {CreateSidebar} from 'components/Sidebars/CreateSidebar/CreateSidebar';
+import {useLocation} from 'wouter';
+import {GetRoutePath} from 'configs/base.const';
+import {useSendFile} from 'hooks/axios/useSendFile';
 
 export const CreateRoutePage = () => {
+  const [, setLocation] = useLocation();
+  useEffect(() => {
+    window.scrollTo({top: 0});
+  }, []);
+
   const {
     currentLabels,
     setCurrentLabels,
-    setRoute,
     currentLinePoints,
+    setRoute,
     setCurrentLinePoints,
   } = useRouteProvider();
   const createRoute = useCreateRoute(
@@ -25,6 +33,7 @@ export const CreateRoutePage = () => {
       setCurrentLabels([]);
       setCurrentLinePoints([]);
       setRoute(route);
+      setLocation(GetRoutePath(route.id));
     },
     (error, code) => {
       console.error(
@@ -32,16 +41,11 @@ export const CreateRoutePage = () => {
       );
     },
   );
-  const getAltitude = useAltitude(
-    (data) => {
-      console.log(data);
-    },
-    (error, code) => {
-      console.error(
-        `Get altitude request filed. Code: ${code}. Message: ${error}`,
-      );
-    },
-  );
+  const getAltitude = useAltitude(undefined, (error, code) => {
+    console.error(
+      `Get altitude request filed. Code: ${code}. Message: ${error}`,
+    );
+  });
 
   const initCenter: LatLng = new LatLng(55.5807481, 36.8251304);
 
@@ -49,15 +53,20 @@ export const CreateRoutePage = () => {
   const {selectedLabel, onChangeLabel, setSelectedLabel, closeMarkerForm} =
     useSelectedLabel({currentLabels, setCurrentLabels});
 
-  const onCreateRoute = (newRoute: IRoute) => {
-    getAltitude(currentLinePoints).then((data) => {
-      console.log('---', data);
-      createRoute({
-        ...newRoute,
-        markers: currentLabels,
-        routePoints: currentLinePoints,
-      });
+  const onCreateRoute = async (newRoute: IRoute) => {
+    const data = await getAltitude(currentLinePoints);
+
+    await createRoute({
+      ...newRoute,
+      markers: currentLabels,
+      routePoints: data || currentLinePoints,
     });
+
+    // const {link} = await useSendFile(newRoute.photos, newRoute);
+    // setRoute((prev) => ({
+    //   ...prev,
+    //   photos: [...prev.photos, link],
+    // }));
   };
 
   return (
@@ -67,8 +76,9 @@ export const CreateRoutePage = () => {
         <div className={style.mapContainer}>
           <div className={style.map}>
             <Map
+              selectLabel={selectedLabel}
               editable={true}
-              initCenter={initCenter}
+              center={initCenter}
               map={map}
               setMap={setMap}
               currentLabels={currentLabels}
@@ -78,15 +88,12 @@ export const CreateRoutePage = () => {
               setSelectedLabel={setSelectedLabel}
             />
           </div>
-          <div className={style.options}>
-            {selectedLabel && (
-              <MarkerForm
-                setLabel={onChangeLabel}
-                label={selectedLabel}
-                close={closeMarkerForm}
-              />
-            )}
-          </div>
+          <CreateSidebar
+            className={style.options}
+            closeMarkerForm={closeMarkerForm}
+            selectedLabel={selectedLabel}
+            onChangeLabel={onChangeLabel}
+          />
         </div>
         <CreateRouteForm
           className={style.createForm}

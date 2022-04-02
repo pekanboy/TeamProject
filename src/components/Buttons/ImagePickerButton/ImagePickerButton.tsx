@@ -35,8 +35,10 @@ export const ImagePickerButton: React.FC<ImagePickerButtonProps> = ({
         appearance={'neutral'}
         className={style.button}
       >
-        <img src={gallery} alt="Загрузить фотографию" />
-        <Text mode={TextMode.TEXT_3}>Загрузить фото</Text>
+        <div className={style.buttonContent}>
+          <img src={gallery} alt="Загрузить фотографию" />
+          <Text mode={TextMode.TEXT_3}>Загрузить фото</Text>
+        </div>
       </Button>
     </div>
   );

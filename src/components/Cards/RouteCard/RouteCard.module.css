@@ -1,0 +1,115 @@
+.container {
+    min-height: 470px;
+    max-height: 470px;
+    flex: 1;
+    max-width: 380px;
+    min-width: 380px;
+
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.img {
+    background-size: cover;
+    width: 100%;
+    height: 65%;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column-reverse;
+
+    padding: 10px;
+
+    cursor: pointer;
+}
+
+.dificult {
+    composes: font__text2_montserrat from global;
+    color: white;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.title {
+    composes: font__text2_montserrat from global;
+    font-size: 24px !important;
+    line-height: 26px !important;
+    color: white;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 16px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 26px;
+}
+
+.description {
+    margin-top: 20px;
+
+    flex: 1;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    word-break: break-all;
+    overflow: hidden;
+    max-height: 52px;
+    min-height: 52px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+}
+
+.more {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+
+    flex: 0;
+
+    margin-top: 14px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+.more:hover {
+    text-decoration: underline;
+}
+
+.content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 0 10px 10px;
+}
+
+.arrow {
+    margin-left: 6px;
+    width: 25px;
+    height: 25px
+
+}

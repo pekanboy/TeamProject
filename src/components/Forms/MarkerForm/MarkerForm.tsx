@@ -16,12 +16,14 @@ export interface MarkerFormProps {
   label: IMarker;
   setLabel: (x: IMarker, needClose?: boolean) => void;
   close: VoidFunction;
+  className?: string;
 }
 
 export const MarkerForm: React.FC<MarkerFormProps> = ({
   label,
   setLabel,
   close,
+  className,
 }) => {
   const [currentMarker, setCurrentMarker] = useState<IMarker>(label);
 
@@ -35,7 +37,7 @@ export const MarkerForm: React.FC<MarkerFormProps> = ({
   };
 
   return (
-    <Form onSubmit={submitHandler}>
+    <Form onSubmit={submitHandler} className={className}>
       <CustomFormItem top={'Название метки'}>
         <Input
           maxLength={100}
@@ -64,7 +66,7 @@ export const MarkerForm: React.FC<MarkerFormProps> = ({
         />
       </CustomFormItem>
       <FormGroup mode="horizontal">
-        <CustomFormItem top="Широта">
+        <CustomFormItem top="Широта" className={style.lat}>
           <Input
             value={currentMarker.position.lng}
             type={'number'}
@@ -80,7 +82,7 @@ export const MarkerForm: React.FC<MarkerFormProps> = ({
             }}
           />
         </CustomFormItem>
-        <CustomFormItem top="Долгота">
+        <CustomFormItem top="Долгота" className={style.lng}>
           <Input
             type={'number'}
             value={currentMarker.position.lat}
@@ -99,10 +101,14 @@ export const MarkerForm: React.FC<MarkerFormProps> = ({
       </FormGroup>
       <CustomFormItem>
         <ButtonGroup mode={'horizontal'} className={style.submitContainer}>
-          <Button onClick={submitHandler} className={style.submit}>
+          <Button
+            onClick={submitHandler}
+            mode={'primary'}
+            className={style.submit}
+          >
             Сохранить
           </Button>
-          <Button onClick={close} className={style.submit}>
+          <Button onClick={close} mode={'primary'} className={style.submit}>
             Отменить
           </Button>
         </ButtonGroup>

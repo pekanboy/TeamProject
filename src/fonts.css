@@ -42,3 +42,11 @@
     font-size: 14px;
     line-height: 26px;
 }
+
+.font__text3_montserrat {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+}

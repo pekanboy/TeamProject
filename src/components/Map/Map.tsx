@@ -10,9 +10,14 @@ import {toCenter} from 'components/Map/Map.helpers';
 import {findMarker} from 'components/Map/Marker/Marker.helpers';
 import {Inspector} from 'components/Map/Inspector/Inspector';
 import classNames from 'classnames';
+import {useEffectEveryOnce} from 'hooks/useEffectEveryOnce';
+import {IRoute} from 'interfaces/IRoute';
+import {DEFAULT_POSITION} from 'configs/base.const';
+import {useNavigate} from 'react-router-dom';
+import {selectedMarkerIcon} from 'components/Map/Marker/Marker.const';
 
 export interface MapProps {
-  initCenter: LatLng;
+  center: LatLng;
   editable: boolean;
   map: Nullable<LeafletMap>;
   setMap: Setter<Nullable<LeafletMap>>;
@@ -20,14 +25,18 @@ export interface MapProps {
   setCurrentLabels?: Setter<IMarker[]>;
   currentLinePoints: LatLng[];
   setCurrentLinePoints?: Setter<LatLng[]>;
-  setSelectedLabel: Setter<Nullable<IMarker>>;
+  selectLabel?: Nullable<IMarker>;
+  setSelectedLabel?: Setter<Nullable<IMarker>>;
   className?: string;
+  initZoom?: number;
+  allRoutes?: IRoute[];
 }
 
 export const Map: React.FC<MapProps> = ({
-  initCenter,
+  center,
   map,
   setMap,
+  selectLabel,
   currentLabels,
   setCurrentLabels,
   currentLinePoints,
@@ -35,6 +44,8 @@ export const Map: React.FC<MapProps> = ({
   setSelectedLabel,
   editable,
   className,
+  initZoom,
+  allRoutes,
 }) => {
   const [isActiveLabel, setIsActiveLabel] = useState<boolean>(false);
   const [isActiveLine, setIsActiveLine] = useState<boolean>(false);
@@ -43,12 +54,24 @@ export const Map: React.FC<MapProps> = ({
   const [deletedLabels, setDeletedLabels] = useState<IMarker[]>([]);
   const [deletedLinePoints, setDeletedLinePoints] = useState<LatLng[]>([]);
 
+  const navigate = useNavigate();
+
   // при добавлении точек к линии перемещает центр к последней точке
   useEffect(() => {
     map &&
       currentLinePoints.length &&
       toCenter(map, currentLinePoints[currentLinePoints.length - 1]);
   }, [currentLinePoints.length]);
+
+  useEffectEveryOnce(() => {
+    map?.on('zoomend', () => {
+      center = map?.getCenter();
+    });
+
+    return () => {
+      map?.off('zoomend');
+    };
+  }, [map !== null]);
 
   // эффект, который отвечает за переключение режимов "Метка", "Линия"
   useEffect(() => {
@@ -62,8 +85,7 @@ export const Map: React.FC<MapProps> = ({
           position: latlng,
         };
 
-        setCurrentLabels?.((prev) => [...prev, point]);
-        setSelectedLabel(point);
+        setSelectedLabel?.(point);
         setDeletedLabels([]);
       } else if (isActiveLine) {
         setCurrentLinePoints?.((prev) => [...prev, latlng]);
@@ -78,12 +100,12 @@ export const Map: React.FC<MapProps> = ({
 
   // Если кнопку отжимают то форма пропадает
   useEffect(() => {
-    setSelectedLabel(null);
+    setSelectedLabel?.(null);
   }, [!isActiveLabel]);
 
   const onMarkerClick = (event: LeafletMouseEvent) => {
     const clickedLabel = findMarker(currentLabels, event.latlng);
-    clickedLabel.length === 1 && setSelectedLabel(clickedLabel[0]);
+    clickedLabel.length === 1 && setSelectedLabel?.(clickedLabel[0]);
   };
 
   // Карта полностью создаться только после создания компонента, поэтому
@@ -97,10 +119,9 @@ export const Map: React.FC<MapProps> = ({
       <div className={classNames(style.container, className)}>
         <MapContainer
           className={style.mapContainer}
-          center={initCenter}
+          center={center}
           zoomControl={false}
           zoom={7}
-          maxZoom={18}
           minZoom={4}
           whenCreated={whenMapCreated}
         >
@@ -117,6 +138,18 @@ export const Map: React.FC<MapProps> = ({
               key={position.toString()}
             />
           ))}
+          {allRoutes?.map((route) => (
+            <MarkerComponent
+              needPopup={false}
+              needAnimation={true}
+              title={route.title}
+              position={route.start || DEFAULT_POSITION}
+              key={route.start?.toString()}
+              onClick={() => {
+                navigate(`/route/${route.id}`);
+              }}
+            />
+          ))}
           <Line points={currentLinePoints} />
         </MapContainer>
       </div>
@@ -127,10 +160,9 @@ export const Map: React.FC<MapProps> = ({
     <div className={classNames(style.container, className)}>
       <MapContainer
         className={style.mapContainer}
-        center={initCenter}
+        center={center}
         zoomControl={false}
-        zoom={7}
-        maxZoom={15}
+        zoom={initZoom || 7}
         minZoom={3}
         whenCreated={whenMapCreated}
       >
@@ -148,6 +180,16 @@ export const Map: React.FC<MapProps> = ({
             key={position.toString()}
           />
         ))}
+        {selectLabel && (
+          <MarkerComponent
+            onClick={onMarkerClick}
+            needPopup={true}
+            needAnimation={true}
+            title={selectLabel.title}
+            position={selectLabel.position}
+            icon={selectedMarkerIcon}
+          />
+        )}
         <Line points={currentLinePoints} />
       </MapContainer>
       <Inspector

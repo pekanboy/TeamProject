@@ -30,13 +30,13 @@
 .mapContainer {
     display: flex;
     flex-direction: row;
-    flex: 1 0;
+    min-height: 90%;
     padding-bottom: 20px;
     width: 100%;
 }
 
 .map {
-    height: 100%;
+    min-height: 90%;
     min-width: calc(100% - var(--options-width) - var(--map-right-margin));
     margin-right: var(--map-right-margin);
     display: flex;
@@ -51,4 +51,17 @@
     background: var(--secondary-color);
     padding: 20px 10px;
     border: 1px solid rgba(220, 225, 229, 1)
+}
+
+.description {
+    padding: 3px 0;
+    width: 100%;
+    word-wrap: break-word;
+    composes: font__text2_montserrat from global
+}
+
+.gallery {
+    margin-top: 53px;
+    width: 100%;
+    min-height: 330px;
 }

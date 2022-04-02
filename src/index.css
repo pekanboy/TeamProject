@@ -1,16 +1,53 @@
 @import '@vkontakte/vkui-tokens/themes/vkBase/cssVars/declarations/index.css';
 @import '@vkontakte/vkui/dist/unstable.css';
 @import 'fonts.css';
-@import 'tokens.css';
 
 /* Переопределяем токены */
 :root {
     --secondary-color: rgb(245, 245, 245);
+
     --button_secondary_foreground: #707070 !important;
-    --button_primary_foreground: rgba(160, 253, 160, 0.47);
-    --button_primary_background: rgba(160, 253, 160, 0.47);
+
+    --button_primary_foreground: white !important;
+    --button_primary_background: rgba(96, 164, 183, 1) !important;
 }
 
+.vkuiCustomSelectDropdown__options {
+    z-index: 500 !important;
+}
+
+.vkuiSelect, .vkuiChipsInput {
+    min-height: 40px !important;
+}
+
+.vkuiCard__in {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+}
+
+.vkuiFormField:focus-within .vkuiFormField__border, .vkuiFormField :focus~.vkuiFormField__border, .vkuiChipsInput--focused .vkuiFormField__border {
+    border: 1px solid #DCE1E6;
+}
+
+
+.FormField__border {
+    border: 1px solid #DCE1E6;
+}
+
+.vkuiTextarea__el {
+    min-height: 100%;
+}
+
+#root {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+input, textarea {
+    outline: 0 !important;
+}
 
 /* Указываем box sizing */
 *,

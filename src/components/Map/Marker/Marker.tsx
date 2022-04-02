@@ -1,8 +1,8 @@
 import React from 'react';
 import {Marker, Popup} from 'react-leaflet';
-import {Icon, LeafletMouseEventHandlerFn} from 'leaflet';
-import icon from 'image/flag.svg';
+import {LeafletMouseEventHandlerFn} from 'leaflet';
 import {IMarker} from 'components/Map/Marker/Marker.interface';
+import {markerIcon} from 'components/Map/Marker/Marker.const';
 
 export interface MarkerProps extends IMarker {
   needPopup?: boolean;
@@ -10,26 +10,22 @@ export interface MarkerProps extends IMarker {
   onClick?: LeafletMouseEventHandlerFn;
 }
 
-const markerLabel = new Icon({
-  iconUrl: icon,
-  iconSize: [23, 27],
-  iconAnchor: [0, 27],
-});
-
 export const MarkerComponent: React.FC<MarkerProps> = ({
   title,
   position,
   icon,
   needPopup,
   onClick,
+  children,
 }) => {
   return (
     <Marker
-      icon={icon || markerLabel}
+      icon={icon || markerIcon}
       position={position}
-      eventHandlers={{click: onClick}}
+      eventHandlers={onClick ? {click: onClick} : undefined}
     >
       {title && needPopup && <Popup offset={[8, -20]}>{title}</Popup>}
+      {children}
     </Marker>
   );
 };

@@ -3,24 +3,34 @@ import {AltitudeGetURL} from 'configs/base.const';
 import {customAxios} from 'hooks/axios/customAxios';
 
 export const useAltitude = (
-  onSuccess: (data: any) => void,
-  onError: (x: string, y: number) => void,
+  onSuccess?: (data: any) => void,
+  onError?: (x: string, y: number) => void,
 ) => {
   return async (positions: LatLng[]) => {
-    const {data, error, code} = await customAxios({
+    if (!positions.length) {
+      return positions;
+    }
+
+    const {data, message, code} = await customAxios({
       url: createAltitudeURL(positions),
     });
 
-    if (error) {
-      onError(error, Number(code));
+    if (code < 200 || code >= 300) {
+      onError?.(message, Number(code));
       return null;
     }
 
     if (data) {
-      onSuccess(data);
+      data.results.forEach(
+        (point: {elevation: number | undefined}, index: number) => {
+          positions[index].alt = Math.trunc(point.elevation || 0);
+        },
+      );
+
+      onSuccess?.(positions);
     }
 
-    return data;
+    return positions;
   };
 };
 

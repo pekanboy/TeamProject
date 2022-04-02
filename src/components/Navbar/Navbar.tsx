@@ -3,6 +3,7 @@ import React from 'react';
 import style from 'components/Navbar/Navbar.module.css';
 import like from 'image/like.svg';
 import profile from 'image/profile.svg';
+import notice from 'image/notice.svg';
 import {NavLink} from 'components/Links/NavLink/NavLink';
 
 export const Navbar: React.FC = () => {
@@ -21,6 +22,13 @@ export const Navbar: React.FC = () => {
         </NavLink>
         <NavLink
           className={style.centerText}
+          path={'/map'}
+          textMode={TextMode.TEXT_3}
+        >
+          Посмотреть на карте
+        </NavLink>
+        <NavLink
+          className={style.centerText}
           path={'/route-create'}
           textMode={TextMode.TEXT_3}
         >
@@ -28,6 +36,7 @@ export const Navbar: React.FC = () => {
         </NavLink>
       </div>
       <div className={style.iconsContainer}>
+        <img className={style.notice} src={notice} alt="Уведомления" />
         <img className={style.like} src={like} alt="Понравившееся" />
         <img className={style.profile} src={profile} alt="Профиль" />
       </div>

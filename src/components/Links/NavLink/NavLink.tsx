@@ -6,6 +6,7 @@ export interface NavLinkProps {
   className?: string;
   path: string;
   textMode?: TextMode;
+  after?: React.ReactNode;
 }
 
 export const NavLink: React.FC<NavLinkProps> = ({
@@ -13,10 +14,12 @@ export const NavLink: React.FC<NavLinkProps> = ({
   path,
   textMode = TextMode.TEXT_3,
   children,
+  after,
 }) => {
   return (
     <Link to={path} className={className}>
       <Text mode={textMode}>{children}</Text>
+      {after}
     </Link>
   );
 };

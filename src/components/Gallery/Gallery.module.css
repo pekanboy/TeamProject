@@ -1,15 +1,17 @@
 .filePicker {
     max-width: 240px;
-    width: calc(25% - var(--select-spacing));
+    width: 200px;
     height: 200px;
+    margin-right: var(--select-spacing);
+
 }
 
 .gallery {
     border-radius: 16px;
     overflow: hidden;
-    margin-left: var(--select-spacing);
-    height: 200px;
-    flex: 1
+    height: 100%;
+    flex: 1;
+    display: flex;
 }
 
 .img {
@@ -22,4 +24,15 @@
 
 .container {
     width: 100%;
+}
+
+.noPhoto {
+    color: #B3B3B3;
+    border: 1px solid #DCE1E6;
+    margin: auto;
+    border-radius: 16px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }

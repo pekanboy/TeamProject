@@ -1,8 +1,6 @@
-import React from 'react';
+import {Setter} from 'types/basic';
 
-export const useDisplayImage = () => {
-  const [result, setResult] = React.useState<string[]>([]);
-
+export const useDisplayImage = (setResult?: Setter<string[]>) => {
   function uploader(e: any) {
     const promises: Promise<unknown>[] = [];
     const imageFiles = e.target.files;
@@ -16,9 +14,9 @@ export const useDisplayImage = () => {
     }
 
     Promise.all(promises).then((result) => {
-      setResult((prev: string[]) => [...prev, ...result] as string[]);
+      setResult?.((prev: string[]) => [...result, ...prev] as string[]);
     });
   }
 
-  return {result, uploader};
+  return {uploader};
 };
