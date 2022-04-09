@@ -13,7 +13,6 @@ import {useAltitude} from 'hooks/axios/useAltitude';
 import {CreateSidebar} from 'components/Sidebars/CreateSidebar/CreateSidebar';
 import {useLocation} from 'wouter';
 import {GetRoutePath} from 'configs/base.const';
-import {useSendFile} from 'hooks/axios/useSendFile';
 
 export const CreateRoutePage = () => {
   const [, setLocation] = useLocation();
@@ -54,12 +53,17 @@ export const CreateRoutePage = () => {
     useSelectedLabel({currentLabels, setCurrentLabels});
 
   const onCreateRoute = async (newRoute: IRoute) => {
-    const data = await getAltitude(currentLinePoints);
+    // let data = null;
+    //
+    // try {
+    //   data = await getAltitude(currentLinePoints);
+    //   // eslint-disable-next-line no-empty
+    // } catch (e) {}
 
     await createRoute({
       ...newRoute,
       markers: currentLabels,
-      routePoints: data || currentLinePoints,
+      routePoints: currentLinePoints,
     });
 
     // const {link} = await useSendFile(newRoute.photos, newRoute);
