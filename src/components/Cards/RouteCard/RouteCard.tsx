@@ -6,12 +6,13 @@ import {difficultPool} from 'components/Forms/CreateRouteForm/CreateRouteForm.co
 import arrow from 'image/arrow.svg';
 import {useLocation} from 'wouter';
 import {GetRoutePath} from 'configs/base.const';
+import {TextMode} from 'components/Text/Text';
 
 export interface RouteCardProps {
   className?: string;
   image: string;
   title: string;
-  dificult: number;
+  difficult: number;
   region: string;
   days: number;
   description: string;
@@ -22,7 +23,7 @@ export const RouteCard: React.FC<RouteCardProps> = ({
   className,
   image,
   title,
-  dificult,
+  difficult,
   region,
   days,
   description,
@@ -43,9 +44,9 @@ export const RouteCard: React.FC<RouteCardProps> = ({
           backgroundImage: `linear-gradient(359.13deg, rgba(0, 0, 0, 0.8) -14.29%, rgba(0, 0, 0, 0) 49.98%), url(${image})`,
         }}
       >
-        <div
-          className={style.dificult}
-        >{`Сложность: ${difficultPool[dificult].label}`}</div>
+        <div className={style.dificult}>{`Сложность: ${
+          difficultPool[difficult - 1].label
+        }`}</div>
         <div className={style.title}>{title}</div>
       </div>
       <div className={style.content}>
@@ -57,6 +58,7 @@ export const RouteCard: React.FC<RouteCardProps> = ({
         <NavLink
           className={style.more}
           path={`/route/${id}`}
+          textMode={TextMode.TEXT}
           after={
             <img
               className={style.arrow}

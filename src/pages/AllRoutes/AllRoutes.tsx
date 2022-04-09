@@ -11,7 +11,7 @@ export const AllRoutes: React.FC = () => {
   const {route: routes, error, refresh} = useAllRoutes();
 
   useEffect(() => {
-    const refreshInterval = setInterval(refresh, 30000);
+    const refreshInterval = setInterval(refresh, 5000);
 
     return () => {
       clearInterval(refreshInterval);
@@ -39,7 +39,7 @@ export const AllRoutes: React.FC = () => {
             description={route?.description || ''}
             image={example}
             title={route?.title || ''}
-            dificult={route?.difficult || 0}
+            difficult={route?.difficult || 0}
             days={route?.days || -1}
             region={route?.region || ''}
             id={route?.id}

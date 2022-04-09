@@ -27,17 +27,21 @@
 }
 
 .dificult {
-    composes: font__text2_montserrat from global;
+    composes: text from global;
     color: white;
     display: inline-block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .title {
-    composes: font__text2_montserrat from global;
+    composes: headline2 from global;
     font-size: 24px !important;
+    font-weight: 300;
     line-height: 26px !important;
     color: white;
     display: inline-block;
@@ -51,12 +55,9 @@
     flex-direction: row;
     justify-content: space-between;
     margin-top: 16px;
+    font-weight: 600 !important;
 
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 26px;
+    composes: text from global;
 }
 
 .description {
@@ -70,22 +71,15 @@
 
     word-break: break-all;
     overflow: hidden;
-    max-height: 52px;
-    min-height: 52px;
+    max-height: 29px;
+    min-height: 29px;
 
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 26px;
+    composes: text from global;
 }
 
 .more {
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 26px;
+    composes: text from global;
+    align-items: center;
 
     flex: 0;
 

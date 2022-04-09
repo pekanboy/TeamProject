@@ -66,13 +66,13 @@ export const Filters: React.FC<FiltersProps> = ({
           getRef={(ref) => (typeRef.current = ref || undefined)}
           placeholder={'Тип маршрута'}
           className={style.select}
-          options={[{value: '', label: 'Тип неважен'}, ...routeTypesPool]}
+          options={[{value: '', label: 'Любой'}, ...routeTypesPool]}
         />
         <CustomSelect
           getRef={(ref) => (difficultRef.current = ref || undefined)}
           placeholder={'Сложность'}
           className={style.select}
-          options={[{value: '', label: 'Сложность любая'}, ...difficultPool]}
+          options={[{value: '', label: 'Любая'}, ...difficultPool]}
         />
         <Input
           getRef={(ref) => (daysRef.current = ref || undefined)}
@@ -85,7 +85,7 @@ export const Filters: React.FC<FiltersProps> = ({
           placeholder={'Сортировка'}
           className={style.select}
           options={[
-            {value: '', label: 'Без сортировки'},
+            {value: '', label: 'Неважно'},
             {value: 'По рейтингу', label: 'По рейтингу'},
             {value: 'По продолжительности', label: 'По набору высоты'},
           ]}

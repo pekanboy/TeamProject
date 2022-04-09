@@ -8,6 +8,7 @@
     background: var(--button_primary_background);
     width: 120px;
     height: 42px;
+    font-weight: 400;
 }
 
 .lat, .lng {

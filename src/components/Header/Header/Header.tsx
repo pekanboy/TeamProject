@@ -14,7 +14,7 @@ export const Header: React.FC<HeaderWithBackgroundProps> = ({
 }) => {
   return (
     <div className={classNames(style.container, className)}>
-      <Text mode={TextMode.TITLE_1}>{title}</Text>
+      <Text mode={TextMode.TITLE1}>{title}</Text>
     </div>
   );
 };

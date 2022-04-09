@@ -1,7 +1,7 @@
 import style from 'pages/RoutePage/RoutePage.module.css';
 import {Header} from 'components/Header/Header/Header';
 import {Map} from 'components/Map/Map';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelectedLabel} from 'hooks/useSelectedLabel';
 import {useGetRoute} from 'hooks/axios/useGetRoute';
 import {Nullable} from 'types/basic';
@@ -26,10 +26,11 @@ export const RoutePage: React.FC<RoutePageProps> = ({id}) => {
     currentLabels: route?.markers || [],
   });
 
-  if (!route.id) {
-    // Todo loading
-    return <div>Загрузка</div>;
-  }
+  useEffect(() => {
+    return () => {
+      setRoute(null);
+    };
+  }, []);
 
   return (
     <div className={style.container}>
@@ -60,7 +61,10 @@ export const RoutePage: React.FC<RoutePageProps> = ({id}) => {
           </div>
         </div>
         {route?.description && (
-          <div className={style.description}>{route?.description}</div>
+          <div className={style.description}>
+            <div className={style.descriptionTitle}>Описание</div>
+            <span className={style.descriptionText}>{route?.description}</span>
+          </div>
         )}
         {(route?.photos?.length && (
           <div className={style.gallery}>

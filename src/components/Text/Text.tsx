@@ -5,10 +5,11 @@ import React from 'react';
 
 export enum TextMode {
   LOGO,
-  TEXT_3,
-  TEXT_2,
-  TITLE_1,
-  TITLE_2,
+  TEXT,
+  TITLE1,
+  TITLE2,
+  HEADLINE1,
+  HEADLINE2,
 }
 
 export interface TextProps {
@@ -17,13 +18,17 @@ export interface TextProps {
 }
 
 export const Text: React.FC<TextProps> = ({mode, children, className}) => {
-  const textStyle = classNames(className, {
-    [style.logo]: mode === TextMode.LOGO,
-    [style.text2]: mode === TextMode.TEXT_2,
-    [style.text3]: mode === TextMode.TEXT_3,
-    [style.title1]: mode === TextMode.TITLE_1,
-    [style.title2]: mode === TextMode.TITLE_2,
-  });
+  const textStyle = classNames(
+    {
+      [style.logo]: mode === TextMode.LOGO,
+      [style.text]: mode === TextMode.TEXT,
+      [style.title1]: mode === TextMode.TITLE1,
+      [style.title2]: mode === TextMode.TITLE2,
+      [style.headline1]: mode === TextMode.HEADLINE1,
+      [style.headline2]: mode === TextMode.HEADLINE2,
+    },
+    className,
+  );
 
   return <div className={textStyle}>{children}</div>;
 };

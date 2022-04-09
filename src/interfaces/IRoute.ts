@@ -14,7 +14,7 @@ export interface IRoute {
   things: string[];
   distance: number;
 
-  photos: string[];
+  photos: File[] | string[];
 
   markers: IMarker[];
   routePoints: LatLng[];

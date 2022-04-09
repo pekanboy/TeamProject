@@ -16,21 +16,21 @@ export const Navbar: React.FC = () => {
         <NavLink
           className={style.centerText}
           path={'/routes'}
-          textMode={TextMode.TEXT_3}
+          textMode={TextMode.HEADLINE2}
         >
           Маршруты
         </NavLink>
         <NavLink
           className={style.centerText}
           path={'/map'}
-          textMode={TextMode.TEXT_3}
+          textMode={TextMode.HEADLINE2}
         >
           Посмотреть на карте
         </NavLink>
         <NavLink
           className={style.centerText}
           path={'/route-create'}
-          textMode={TextMode.TEXT_3}
+          textMode={TextMode.HEADLINE2}
         >
           Создать маршрут
         </NavLink>

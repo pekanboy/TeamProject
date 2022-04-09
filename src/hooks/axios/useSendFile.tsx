@@ -6,27 +6,26 @@ import {
   URLToSendRequests,
 } from 'configs/base.const';
 
-export const useSendFile = async (files: string[], route: IRoute) => {
-  const sendMetadata = async (file: string) => {
-    const fileSplit = file.split('/');
-    const fileName = fileSplit[fileSplit.length - 1];
-
+export const useSendFile = async (files: File[], route: IRoute) => {
+  const sendMetadata = async (file: File) => {
     return customAxios({
       url: `${URLToSendRequests}${FilesRoutePath}`,
       method: 'POST',
       data: {
-        filename: fileName,
+        filename: file.name,
         owner: 'route',
         owner_id: route.id,
       },
     });
   };
 
-  const sendFile = async (file: string, id: number) => {
+  const sendFile = async (file: File, id: number) => {
+    const arrayBuffer = await file.arrayBuffer();
+
     return customAxios({
       url: `${URLToSendRequests}${GetFilesRoutePathPut(id)}`,
       method: 'PUT',
-      data: null,
+      data: arrayBuffer,
       headers: {
         'Content-Type': 'application/octet-stream',
       },

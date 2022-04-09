@@ -24,22 +24,22 @@ export const RouteInfo: React.FC<RouteInfoProps> = ({
         src={profileAvatar}
         alt="Аватар пользователя"
       />
-      <Text mode={TextMode.TITLE_2} className={style.title}>
+      <Text mode={TextMode.HEADLINE1} className={style.title}>
         {title}
       </Text>
       {/* Todo: Сделать звездочки */}
       <div className={style.scrollbar}>
         <div className={style.info}>
-          <Text mode={TextMode.TEXT_2} className={style.infoText}>
+          <Text mode={TextMode.TEXT} className={style.infoText}>
             Сложность: {difficult}/5
           </Text>
-          <Text mode={TextMode.TEXT_2} className={style.infoText}>
+          <Text mode={TextMode.TEXT} className={style.infoText}>
             Время маршрута: {days} дней
           </Text>
-          <Text mode={TextMode.TEXT_2} className={style.infoText}>
+          <Text mode={TextMode.TEXT} className={style.infoText}>
             Тип похода: {type}
           </Text>
-          <Text mode={TextMode.TEXT_2} className={style.infoText}>
+          <Text mode={TextMode.TEXT} className={style.infoText}>
             Лучшее время: {bestTimeToGo}
           </Text>
         </div>

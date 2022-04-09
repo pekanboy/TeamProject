@@ -12,7 +12,7 @@ export interface NavLinkProps {
 export const NavLink: React.FC<NavLinkProps> = ({
   className,
   path,
-  textMode = TextMode.TEXT_3,
+  textMode = TextMode.HEADLINE1,
   children,
   after,
 }) => {

@@ -1,16 +1,17 @@
 import React, {FormEvent, useEffect, useState} from 'react';
 import {
+  Button,
+  ButtonGroup,
   FormLayout as Form,
+  FormLayoutGroup as FormGroup,
   Input,
   Textarea,
-  ButtonGroup,
-  Button,
-  FormLayoutGroup as FormGroup,
 } from '@vkontakte/vkui';
 import {IMarker} from 'components/Map/Marker/Marker.interface';
 import {LatLng} from 'leaflet';
 import {CustomFormItem} from 'components/Forms/CustomFormItem/CustomFormItem';
 import style from 'components/Forms/MarkerForm/MarkerForm.module.css';
+import {Text, TextMode} from 'components/Text/Text';
 
 export interface MarkerFormProps {
   label: IMarker;
@@ -106,10 +107,10 @@ export const MarkerForm: React.FC<MarkerFormProps> = ({
             mode={'primary'}
             className={style.submit}
           >
-            Сохранить
+            <Text mode={TextMode.TEXT}>Сохранить</Text>
           </Button>
           <Button onClick={close} mode={'primary'} className={style.submit}>
-            Отменить
+            <Text mode={TextMode.TEXT}>Отменить</Text>
           </Button>
         </ButtonGroup>
       </CustomFormItem>

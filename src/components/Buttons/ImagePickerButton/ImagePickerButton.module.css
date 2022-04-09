@@ -31,7 +31,7 @@
 }
 
 .buttonContent {
-    composes: font__text3_montserrat from global;
+    composes: font__text from global;
     align-items: center;
     display: flex;
     flex-direction: column;

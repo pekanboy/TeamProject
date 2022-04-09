@@ -51,7 +51,7 @@ export const CreateRouteForm: React.FC<CreateRouteFormProps> = ({
   const thingsRef = useRef<HTMLInputElement>();
   const descRef = useRef<HTMLTextAreaElement>();
   const niceTimeRef = useRef<HTMLSelectElement>();
-  const [result, setResult] = React.useState<string[]>([]);
+  const [result, setResult] = React.useState<File[]>([]);
 
   const onSubmit = () => {
     // Todo Прикрутить валидацию

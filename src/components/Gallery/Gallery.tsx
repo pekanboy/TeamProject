@@ -11,8 +11,8 @@ export interface GalleryProps {
   onChangeGallery?: (x: any[]) => void;
   className?: string;
   slideWith: number;
-  result: string[];
-  setResult?: Setter<string[]>;
+  result: File[] | string[];
+  setResult?: Setter<File[]>;
   needPicker?: boolean;
 }
 
@@ -49,11 +49,11 @@ export const Gallery: React.FC<GalleryProps> = ({
         {!result.length && (
           <div className={style.noPhoto}>Фотографии не выбраны</div>
         )}
-        {result.map((src?: string) => {
+        {result.map((src: Blob | string) => {
           return (
             <img
               className={style.img}
-              src={src}
+              src={typeof src === 'string' ? src : URL.createObjectURL(src)}
               key={`image-${result.slice(0, 256).toString()}`}
             />
           );

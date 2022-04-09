@@ -45,7 +45,7 @@ export const CreateSidebar: React.FC<CreateSidebarProps> = ({
         onClick={onContinue}
         mode={'primary'}
       >
-        <Text mode={TextMode.TEXT_3}>Далее</Text>
+        <Text mode={TextMode.HEADLINE2}>ДАЛЕЕ</Text>
       </Button>
     </div>
   );

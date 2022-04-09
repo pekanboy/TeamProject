@@ -2,12 +2,12 @@ import React, {useContext, useState} from 'react';
 import {defaultRoute, IRoute} from 'interfaces/IRoute';
 import {IMarker} from 'components/Map/Marker/Marker.interface';
 import {LatLng} from 'leaflet';
-import {Setter} from 'types/basic';
+import {Nullable, Setter} from 'types/basic';
 import {noop} from '@vkontakte/vkui/dist/lib/utils';
 
 export interface RouteProviderContextType {
-  route: IRoute;
-  setRoute: Setter<IRoute>;
+  route: Nullable<IRoute>;
+  setRoute: Setter<Nullable<IRoute>>;
   currentLabels: IMarker[];
   setCurrentLabels: Setter<IMarker[]>;
   currentLinePoints: LatLng[];
@@ -30,7 +30,7 @@ export const RouteProvider: React.FC = ({children}) => {
   const [currentLinePoints, setCurrentLinePoints] = useState<LatLng[]>([]);
 
   // Тут лежит текущий открытый маршрут
-  const [route, setRoute] = useState<IRoute>(defaultRoute);
+  const [route, setRoute] = useState<Nullable<IRoute>>(defaultRoute);
 
   const contextValue = {
     currentLabels: currentLabels,
