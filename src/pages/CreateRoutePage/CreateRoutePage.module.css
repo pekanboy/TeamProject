@@ -1,0 +1,56 @@
+:root {
+    --header-height: calc(20px + 60px);
+    --map-right-margin: 30px;
+
+    --options-width: 275px;
+    --create-form-margin-top: 30px;
+    --create-form-margin-bottom: 30px;
+    --create-form-height: 660px;
+
+    --continueButtonHeight: 42px;
+}
+
+.container {
+    width: 100%;
+    height: calc(100% + var(--create-form-height) + var(--create-form-margin-top) + var(--create-form-margin-bottom));
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.header {
+    height: var(--header-height);
+    margin-top: 20px;
+}
+
+.content {
+    width: 100%;
+    flex: 1;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mapContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.map {
+    min-width: calc(100% - var(--options-width) - var(--map-right-margin));
+    margin-right: var(--map-right-margin);
+    display: flex;
+}
+
+.options {
+    width: var(--options-width);
+}
+
+.createForm {
+    height: var(--create-form-height);
+    margin: var(--create-form-margin-top) 0 var(--create-form-margin-bottom);
+    width: 100%;
+}

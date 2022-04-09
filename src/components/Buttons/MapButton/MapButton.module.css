@@ -1,0 +1,15 @@
+.button {
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.icon {
+    height: 22px;
+    width: 22px;
+}
+
+.active {
+    background: rgba(208, 208, 208, 0.63);
+}

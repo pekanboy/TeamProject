@@ -1,0 +1,23 @@
+.logo {
+    composes: logo from global;
+}
+
+.text {
+    composes: text from global;
+}
+
+.title1 {
+    composes: title1 from global;
+}
+
+.title2 {
+    composes: title2 from global;
+}
+
+.headline1 {
+    composes: headline1 from global;
+}
+
+.headline2 {
+    composes: headline2 from global;
+}

@@ -1,0 +1,57 @@
+:root {
+    --margin-top: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1;
+    max-width: 100%;
+}
+
+.avatar {
+    width: 115px;
+    height: 115px;
+    border-radius: 115px;
+    margin: -65px auto 0;
+    object-fit: fill;
+}
+
+.title {
+    font-size: 24px;
+    line-height: 32px;
+
+    margin-top: var(--margin-top);
+}
+
+.scrollbar {
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    padding: 0 12px;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.info {
+    padding-left: 2px;
+    border-left: black 2px solid;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.infoText, .description {
+    line-height: 17px;
+}
+
+.description {
+    margin-top: var(--margin-top);
+}
+
+.infoText + .infoText {
+    margin-top: 4px;
+}
+

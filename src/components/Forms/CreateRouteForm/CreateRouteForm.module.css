@@ -1,0 +1,96 @@
+:root {
+    --select-spacing: 30px;
+    --margin-top: 25px;
+}
+
+.container {
+    border-radius: 20px;
+    padding: 15px 73px 15px;
+    background: var(--secondary-color);
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.header {
+    composes: title2 from global;
+    font-size: 3vw;
+    text-align: left;
+    padding-left: 0;
+    padding-right: 0;
+    height: 40px;
+}
+
+.header > div {
+    display: none !important;
+}
+
+.header > input {
+    height: 60px !important;
+    font: inherit !important;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.box {
+    composes: text from global;
+    margin-top: var(--margin-top);
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+}
+
+.leftColumn {
+    display: flex;
+    flex-direction: column;
+    width: 310px;
+    margin-right: var(--select-spacing);
+}
+
+.rightColumn {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+}
+
+.select + .select, .select + .days {
+    margin-top: var(--margin-top);
+}
+
+.select, .days {
+    max-height: 40px;
+    min-height: 40px;
+    max-width: 310px;
+    width: 100%;
+}
+
+.centerSelect {
+    max-width: none;
+    flex: 1;
+}
+
+.chipSelect {
+    height: max-content;
+    min-height: 40px !important;
+    position: relative;
+}
+
+.textarea {
+    border: none !important;
+    margin-top: var(--margin-top);
+    flex: 1;
+}
+
+.submit {
+    background: var(--button_primary_background);
+    min-width: 155px;
+    min-height: 40px;
+    margin: 25px auto 0;
+    composes: text from global;
+    border: 1px solid #DCE0E5;
+    box-sizing: border-box;
+    border-radius: 6px;
+    color: white !important;
+}

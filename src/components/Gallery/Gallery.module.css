@@ -1,0 +1,38 @@
+.filePicker {
+    max-width: 240px;
+    width: 200px;
+    height: 200px;
+    margin-right: var(--select-spacing);
+
+}
+
+.gallery {
+    border-radius: 16px;
+    overflow: hidden;
+    height: 100%;
+    flex: 1;
+    display: flex;
+}
+
+.img {
+    height: 200px;
+    width: 240px;
+    object-fit: cover;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.container {
+    width: 100%;
+}
+
+.noPhoto {
+    color: #B3B3B3;
+    border: 1px solid #DCE1E6;
+    margin: auto;
+    border-radius: 16px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}

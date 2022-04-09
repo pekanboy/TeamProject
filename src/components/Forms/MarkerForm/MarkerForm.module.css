@@ -1,0 +1,20 @@
+.submitContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.submit {
+    background: var(--button_primary_background);
+    width: 120px;
+    height: 42px;
+    font-weight: 400;
+}
+
+.lat, .lng {
+    width: 120px;
+}
+
+.lng {
+    margin-left: 12px !important;
+}
